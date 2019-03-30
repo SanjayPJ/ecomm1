@@ -17,6 +17,17 @@ class ShopController extends Controller
     		'price' => $pdt->price
     	])->associate('App\Product');
     	return redirect()->route('cart');
+	}
+	
+	public function rapid_add($id){
+    	$pdt = Product::findOrFail($id);
+    	$cart_item = Cart::add([
+    		'id' => $pdt->id, 
+    		'name' => $pdt->name, 
+    		'qty' => 1, 
+    		'price' => $pdt->price
+    	])->associate('App\Product');
+    	return redirect()->back();
     }
 
     public function index(){
@@ -26,5 +37,15 @@ class ShopController extends Controller
     public function delete_item($id){
     	Cart::remove($id);
     	return redirect()->back();
-    }
+	}
+	
+	public function inc($id, $qty){
+		Cart::update($id, $qty + 1);
+		return redirect()->back();
+	}
+
+	public function dec($id, $qty){
+		Cart::update($id, $qty - 1);
+		return redirect()->back();
+	}
 }

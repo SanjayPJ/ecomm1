@@ -60,9 +60,9 @@
                                 <td class="product-quantity">
 
                                     <div class="quantity">
-                                        <a href="#" class="quantity-minus">-</a>
+                                    <a href="{{ route('cart.dec', ['id' => $pdt->rowId , 'qty' => $pdt->qty]) }}" class="quantity-minus">-</a>
                                         <input title="Qty" class="email input-text qty text" type="text" value="{{ $pdt->qty }}" readonly>
-                                        <a href="#" class="quantity-plus">+</a>
+                                    <a href="{{ route('cart.inc', ['id' => $pdt->rowId , 'qty' => $pdt->qty]) }}" class="quantity-plus">+</a>
                                     </div>
 
                                 </td>
@@ -98,13 +98,13 @@
                             </tbody>
                         </table>
 
-
+                        
                     </form>
 
                     <div class="cart-total">
                         <h3 class="cart-total-title">Cart Totals</h3>
-                        <h5 class="cart-total-total">Total: <span class="price">$100.97</span></h5>
-                        <a href="20_checkout.html" class="btn btn-medium btn--light-green btn-hover-shadow">
+                    <h5 class="cart-total-total">Total: <span class="price">$ {{ Cart::total() }}</span></h5>
+                    <a href="{{  route('cart.checkout') }}" class="btn btn-medium btn--light-green btn-hover-shadow">
                             <span class="text">Checkout</span>
                             <span class="semicircle"></span>
                         </a>
